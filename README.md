@@ -48,32 +48,16 @@ flowchart TD
 | `kubectl` / `eksctl` | Interact with and provision Kubernetes/EKS resources |
 | Argo CD | Reconciles Kubernetes resources from the GitOps repository |
 
-## Repositories and key files
-
-### Application repository
-
-The application source repository is:
-
-`https://github.com/antarctic672/register-app`
-
-Important files typically include:
+## Key files
 
 - `Jenkinsfile` — defines the CI pipeline.
 - `pom.xml` — Maven project configuration and dependencies.
 - Application source files — the code packaged and deployed by the pipeline.
 - `Dockerfile` — defines how the application container image is built, if included in this repository.
-
-Check the repository for the exact file names and layout.
-
-### GitOps repository
-
-The separate GitOps repository stores the desired Kubernetes configuration. The files described in the project setup include:
-
 - `deployment.yaml` — declares the application Deployment, replica count, and container image/tag.
 - `service.yaml` — defines how the application is exposed inside or outside the cluster, depending on its Service type.
 - `Jenkinsfile` — defines the CD pipeline that updates the deployment image tag and pushes the manifest change to GitHub.
 
-Keep the application source and deployment configuration separate so that the deployed version is visible in Git history.
 
 ## CI pipeline: `register-app-ci`
 
