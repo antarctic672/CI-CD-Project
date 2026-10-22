@@ -92,8 +92,6 @@ The version tag is formed from the configured release and Jenkins build number, 
 
 The pipeline also publishes a `latest` tag. For repeatable deployments, prefer the specific version tag in Kubernetes manifests rather than relying on `latest`.
 
-> **Security note:** If Trivy is configured with `--exit-code 0`, findings are reported but do not fail the build. Configure an appropriate non-zero exit code and remediation policy if vulnerabilities should block releases.
-
 ## CD pipeline: `gitops-register-app-cd`
 
 The CD job receives the image tag from the CI job and uses the GitOps repository.
