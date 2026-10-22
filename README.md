@@ -113,21 +113,6 @@ The Deployment manifest in this project is configured for **two replicas** in th
 
 The Kubernetes Service provides access to the Pods. If it is configured as a `LoadBalancer`, AWS can provision a load balancer and external DNS name. The actual access method depends on the committed Service manifest and AWS configuration.
 
-## Prerequisites
-
-Before reproducing the project, prepare:
-
-- An AWS account with permission to create and manage the required EC2, IAM, EKS, networking, and load-balancing resources.
-- A Jenkins controller and a connected Jenkins agent.
-- A GitHub account and access to both repositories.
-- A SonarQube server reachable from Jenkins.
-- A Docker Hub account and repository.
-- An EKS cluster and a machine or environment configured with AWS CLI, `kubectl`, and `eksctl` as needed.
-- Argo CD installed and configured to access the GitOps repository and target cluster.
-- Required Jenkins plugins, tools, credentials, and job configuration.
-
-Use compatible versions of Java, Maven, Jenkins plugins, AWS CLI, `kubectl`, `eksctl`, and Argo CD for your environment. Exact versions are not specified here.
-
 ## How to test the pipeline
 
 1. Make a small, safe change to the application code.
@@ -139,15 +124,17 @@ Use compatible versions of Java, Maven, Jenkins plugins, AWS CLI, `kubectl`, `ek
 7. Check Argo CD to confirm that the application is synchronized and healthy.
 8. Verify the Kubernetes resources and test the application through the Service's configured endpoint.
 
+
+
 ## Challenges encountered
 
-### Jenkins CI-to-CD trigger returned `403 Access Denied`
+### Jenkins CI-to-CD trigger did not work
 
-While configuring the CI pipeline to start `gitops-register-app-cd`, the request returned a `403 Access Denied` response with an invalid-token message. This highlighted an important distinction: Jenkins API-token authentication and a job's remote-build trigger token are different mechanisms. The trigger configuration and the authentication method used by the request must match.
+When Jenkins tried to trigger the CD pipeline using gitops-trigger-token, it returned a 403 Access Denied error because the token was rejected. I switched to using a Jenkins API token, which successfully triggered the CD pipeline.
 
-### Keeping Jenkins credentials consistent
+### Understanding the idea of the CI/CD
 
-The pipelines rely on Jenkins credentials for services such as GitHub, SonarQube, Docker Hub, and Jenkins job triggering. The credential IDs referenced in a Jenkinsfile must match the IDs configured in Jenkins. This project keeps those credentials in Jenkins rather than storing secret values in the repository.
+I think that the main challenge and lesson was to actually understand the pipeline itself. Before I started this project I did not truly understand how does it work and what for - the explanation from the internet and videos did not make sense to me. I had to learn on the go. Getting close to the end, I finally clarified for myself the exact purpose of every tool.
 
 ## Security and cost considerations
 
