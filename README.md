@@ -113,7 +113,7 @@ The Deployment manifest in this project is configured for **two replicas** in th
 
 The Kubernetes Service provides access to the Pods. If it is configured as a `LoadBalancer`, AWS can provision a load balancer and external DNS name. The actual access method depends on the committed Service manifest and AWS configuration.
 
-## How to test the pipeline
+## How to test the pipeline(+ the result)
 
 1. Make a small, safe change to the application code.
 2. Commit and push it to the `main` branch of the application repository.
@@ -124,6 +124,15 @@ The Kubernetes Service provides access to the Pods. If it is configured as a `Lo
 7. Check Argo CD to confirm that the application is synchronized and healthy.
 8. Verify the Kubernetes resources and test the application through the Service's configured endpoint.
 
+<img width="1920" height="1080" alt="Screenshot_20261021_223348" src="https://github.com/user-attachments/assets/baffba34-f8cf-40ae-a38a-f58cd6cfde68" />
+<img width="1920" height="1080" alt="Screenshot_20261021_223432" src="https://github.com/user-attachments/assets/289e4983-50e5-4d65-8df4-d4d19d2fff4b" />
+<img width="1920" height="1080" alt="Screenshot_20261021_223722" src="https://github.com/user-attachments/assets/014010e9-4757-4f16-bc32-79c7169a61dd" />
+<img width="1920" height="1080" alt="Screenshot_20261021_223739" src="https://github.com/user-attachments/assets/8862d8cb-8284-4818-8d43-1d2bdc2ad0e3" />
+<img width="1920" height="1080" alt="Screenshot_20261021_223801" src="https://github.com/user-attachments/assets/68bfe68e-b1f7-4743-b5eb-c8bd20269116" />
+<img width="1920" height="1080" alt="Screenshot_20261021_223836" src="https://github.com/user-attachments/assets/c744dbfc-07d8-424f-ba64-49c120ee8a23" />
+<img width="1920" height="1080" alt="Screenshot_20261021_223852" src="https://github.com/user-attachments/assets/83e2b23e-032b-4f1b-a19f-56087a173cdf" />
+<img width="1920" height="1080" alt="Screenshot_20261021_223909" src="https://github.com/user-attachments/assets/0d859721-e918-4a3b-b406-b9f716423b18" />
+<img width="1920" height="1080" alt="Screenshot_20261021_224033" src="https://github.com/user-attachments/assets/19c98be4-5a89-4073-8237-286177159aca" />
 
 
 ## Challenges encountered
