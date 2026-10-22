@@ -10,7 +10,7 @@ The project separates application source code from Kubernetes deployment configu
 
 - **Application repository:** [register-app](https://github.com/antarctic672/register-app)
 - **Container image:** [`antarctic672/register-app-pipeline`](https://hub.docker.com/r/antarctic672/register-app-pipeline)
-- **GitOps repository:** Add the URL of your GitOps repository here.
+- **GitOps repository:** [gitops-register-app](https://github.com/antarctic672/gitops-register-app)
 
 When a change is pushed to the application's `main` branch, Jenkins checks out the code and runs the CI pipeline. If the pipeline succeeds, Jenkins builds and publishes a Docker image, scans it with Trivy, and triggers the CD pipeline. The CD pipeline updates the image tag in the GitOps repository. Argo CD detects the changed Kubernetes manifest and synchronizes the desired state to Amazon EKS.
 
@@ -103,7 +103,7 @@ antarctic672/register-app-pipeline
 The version tag is formed from the configured release and Jenkins build number, for example:
 
 ```text
-1.0.0-59
+1.0.0-60
 ```
 
 The pipeline also publishes a `latest` tag. For repeatable deployments, prefer the specific version tag in Kubernetes manifests rather than relying on `latest`.
@@ -146,23 +146,6 @@ Before reproducing the project, prepare:
 
 Use compatible versions of Java, Maven, Jenkins plugins, AWS CLI, `kubectl`, `eksctl`, and Argo CD for your environment. Exact versions are not specified here.
 
-## Jenkins configuration checklist
-
-Configure the following in Jenkins. Credential IDs must match those referenced by your actual Jenkinsfiles.
-
-- [ ] A node/agent label matching the pipeline's `agent` label (for example, `Jenkins-Agent`).
-- [ ] Java and Maven tool installations matching the names in the CI Jenkinsfile.
-- [ ] GitHub credentials with the minimum required repository permissions.
-- [ ] SonarQube server configuration and analysis token.
-- [ ] SonarQube webhook pointing to the Jenkins endpoint required by the installed integration.
-- [ ] Docker Hub credentials using an access token.
-- [ ] A Jenkins API token or remote-build trigger token, configured consistently with the CD job.
-- [ ] CI job `register-app-ci`.
-- [ ] CD job `gitops-register-app-cd`, with an image-tag parameter.
-- [ ] GitHub polling or a webhook to trigger CI when application code changes.
-
-Store secrets in Jenkins Credentials. Do not commit tokens, passwords, private keys, kubeconfig files, or AWS access keys to either repository.
-
 ## How to test the pipeline
 
 1. Make a small, safe change to the application code.
@@ -173,18 +156,6 @@ Store secrets in Jenkins Credentials. Do not commit tokens, passwords, private k
 6. Check the GitOps repository to verify that `deployment.yaml` contains the new image tag.
 7. Check Argo CD to confirm that the application is synchronized and healthy.
 8. Verify the Kubernetes resources and test the application through the Service's configured endpoint.
-
-Useful commands when your `kubectl` context points to the correct EKS cluster:
-
-```bash
-kubectl get nodes
-kubectl get pods -A
-kubectl get deployments
-kubectl get services
-kubectl describe deployment <deployment-name>
-```
-
-Use the namespace that contains your application if it is not `default`.
 
 ## Challenges encountered
 
@@ -222,7 +193,7 @@ By completing this project, you can practice:
 
 ## Acknowledgment
 
-This project was developed as a hands-on learning exercise based on a CI/CD walkthrough using Jenkins, Maven, Docker, SonarQube, Trivy, Argo CD, and Amazon EKS. The repository configuration and implementation may differ from the original walkthrough.
+This project was developed as a hands-on learning exercise based on a CI/CD walkthrough using Jenkins, Maven, Docker, SonarQube, Trivy, Argo CD, and Amazon EKS. Some initial files like the webapp were copied.
 
 ---
 
