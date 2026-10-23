@@ -160,14 +160,15 @@ This project is intended for learning and should be hardened before production u
 
 ## Learning outcomes
 
-By completing this project, you can practice:
+By completing this project, I have learned/took a grasp of:
 
-- Building a Jenkins pipeline for a Java/Maven application.
-- Running automated tests and static code analysis.
-- Creating, scanning, and publishing Docker images.
-- Passing an image version from CI to CD.
-- Updating Kubernetes manifests through Git.
-- Using Argo CD to deploy Git-managed configuration to Amazon EKS.
+- How to build a CI/CD pipeline using Jenkins for a Java/Maven application.
+- How to automate builds, tests, and code quality checks with SonarQube.
+- How to build, scan, version, and push Docker images to Docker Hub.
+- How to connect Jenkins CI and CD pipelines and pass image versions between them.
+- How to use Git for managing Kubernetes deployment manifests.
+- How to deploy applications to Amazon EKS using Argo CD and GitOps.
+- How to configure Jenkins authentication and troubleshoot pipeline integration issues.
 
 ## Acknowledgment
 
